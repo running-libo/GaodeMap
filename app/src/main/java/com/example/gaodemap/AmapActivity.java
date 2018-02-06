@@ -31,12 +31,17 @@ public class AmapActivity extends AppCompatActivity implements LocationSource {
             aMap = mapView.getMap();
         }
 
+        setLocationCallBack();
+
         //设置定位监听
         aMap.setLocationSource(this);
         //设置缩放级别
         aMap.moveCamera(CameraUpdateFactory.zoomTo(15));
+        //显示定位层并可触发，默认false
+        aMap.setMyLocationEnabled(true);
+    }
 
-
+    private void setLocationCallBack(){
         locationUtil = new LocationUtil();
         locationUtil.setLocationCallBack(new LocationUtil.ILocationCallBack() {
             @Override
@@ -49,9 +54,6 @@ public class AmapActivity extends AppCompatActivity implements LocationSource {
                 aMap.addMarker(locationUtil.getMarkerOption(str,lat,lgt));
             }
         });
-
-        //显示定位层并可触发，默认false
-        aMap.setMyLocationEnabled(true);
     }
 
     //定位激活回调
